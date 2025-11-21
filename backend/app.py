@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from config import Config
 import os
+# updated backend after cleaning history
 
 # Import routes
 from routes.auth import auth_bp
