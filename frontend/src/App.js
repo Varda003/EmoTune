@@ -4,6 +4,8 @@ import RegisterPage from './components/Auth/RegisterPage';
 import LoginPage from './components/Auth/LoginPage';
 import MainApp from './components/EmotionDetection/MainApp';
 import ProfilePage from './components/Profile/ProfilePage';
+import MusicGames from "./pages/MusicGames";
+import LandingPage from './components/LandingPage/LandingPage';
 import { isAuthenticated } from './services/api';
 import './App.css';
 
@@ -27,17 +29,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Default route - redirect based on auth status */}
-        <Route 
-          path="/" 
-          element={
-            isAuthenticated() ? 
-              <Navigate to="/app" replace /> : 
-              <Navigate to="/register" replace />
-          } 
-        />
+        {/* Landing Page - Always accessible */}
+        <Route path="/" element={<LandingPage />} />
 
-        {/* Public Routes */}
+        {/* Public Routes - Redirect to /app if logged in */}
         <Route 
           path="/register" 
           element={
@@ -56,7 +51,7 @@ function App() {
           } 
         />
 
-        {/* Protected Routes */}
+        {/* Protected Routes - Require authentication */}
         <Route 
           path="/app" 
           element={
@@ -67,6 +62,15 @@ function App() {
         />
         
         <Route 
+          path="/games" 
+          element={
+            <ProtectedRoute>
+              <MusicGames />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route 
           path="/profile" 
           element={
             <ProtectedRoute>
@@ -76,10 +80,7 @@ function App() {
         />
 
         {/* 404 Route */}
-        <Route 
-          path="*" 
-          element={<Navigate to="/" replace />} 
-        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../../services/api';
 
@@ -17,6 +18,23 @@ const LoginPage = () => {
   const [newPassword, setNewPassword] = useState('');
   const [resetStep, setResetStep] = useState(1); // 1: email, 2: code, 3: new password
   const [resetMessage, setResetMessage] = useState('');
+
+
+  // ✅ STEP 1: Handle redirect from Google OAuth
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const access_token = params.get('access_token');
+    const refresh_token = params.get('refresh_token');
+
+    if (access_token && refresh_token) {
+      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('refresh_token', refresh_token);
+
+      // Small delay before redirect
+      setTimeout(() => navigate('/app'), 300);
+    }
+  }, [navigate]);
+  // ✅ END Google OAuth handler
 
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -37,35 +55,35 @@ const LoginPage = () => {
       password: formData.password,
     });
 
-    // if (response.success) {
-    //   // FIX: Save token and user BEFORE navigating
-    //   localStorage.setItem('access_token', response.access_token);
-    //   localStorage.setItem('user', JSON.stringify(response.user));
-      
-    //   // Small delay to ensure storage completes
-    //   setTimeout(() => {
-    //     navigate('/app');
-    //   }, 100);
-    // }
     if (response.success) {
-  // Clean the token before saving
-  const cleanToken = response.access_token.trim();
-  console.log('💾 Saving token, length:', cleanToken.length);
-  console.log('💾 Token preview:', cleanToken.substring(0, 30));
+      // FIX: Save token and user BEFORE navigating
+      localStorage.setItem('access_token', response.access_token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      
+      // Small delay to ensure storage completes
+      setTimeout(() => {
+        navigate('/app');
+      }, 100);
+    }
+//     if (response.success) {
+//   // Clean the token before saving
+//   const cleanToken = response.access_token.trim();
+//   console.log('💾 Saving token, length:', cleanToken.length);
+//   console.log('💾 Token preview:', cleanToken.substring(0, 30));
   
-  localStorage.setItem('access_token', cleanToken);
-  localStorage.setItem('user', JSON.stringify(response.user));
+//   localStorage.setItem('access_token', cleanToken);
+//   localStorage.setItem('user', JSON.stringify(response.user));
   
-  // Verify it was saved
-  const savedToken = localStorage.getItem('access_token');
-  console.log('✅ Token saved successfully:', !!savedToken);
-  console.log('✅ Saved token preview:', savedToken.substring(0, 30));
+//   // Verify it was saved
+//   const savedToken = localStorage.getItem('access_token');
+//   console.log('✅ Token saved successfully:', !!savedToken);
+//   console.log('✅ Saved token preview:', savedToken.substring(0, 30));
   
-  // Navigate after verification
-  setTimeout(() => {
-    navigate('/app');
-  }, 100);
-}
+//   // Navigate after verification
+//   setTimeout(() => {
+//     navigate('/app');
+//   }, 100);
+// }
   } catch (err) {
     setError(
       err.response?.data?.message || 
@@ -147,8 +165,7 @@ const LoginPage = () => {
               marginBottom: '30px',
               background: 'var(--warning-gradient)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontSize: '1.8rem'
+              fontSize: '2.0rem'
             }}>
               {resetStep === 1 && 'Enter Your Email'}
               {resetStep === 2 && 'Enter Reset Code'}
@@ -253,7 +270,11 @@ const LoginPage = () => {
 
       <div className="container">
         <div style={{ textAlign: 'center', padding: '40px 0' }}>
-          <h1 className="logo">EmoTune</h1>
+          <h1 className="logo"
+          onClick={() => navigate('/')} 
+          style={{ cursor: 'pointer' }}
+        >
+          EmoTune</h1>
           <p className="tagline">
             Welcome Back! Login to Continue Your Musical Journey
           </p>
@@ -335,6 +356,75 @@ const LoginPage = () => {
               )}
             </button>
           </form>
+           
+          {/* Divider between login and Google button */}
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '25px 0',
+  }}
+>
+  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.2)' }}></div>
+  <span
+    style={{
+      margin: '0 12px',
+      color: 'rgba(255,255,255,0.6)',
+      fontSize: '0.9rem',
+    }}
+  >
+    or
+  </span>
+  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.2)' }}></div>
+</div>
+
+{/* --- Google Login Button --- */}
+<div style={{ textAlign: 'center' }}>
+  <button
+    type="button"
+    onClick={() => {
+    window.location.href = "http://localhost:5000/api/auth/google-login";
+  }}
+    style={{
+      width: '100%',
+      background: 'linear-gradient(90deg, #667eea, #764ba2)',
+      border: 'none',
+      color: '#fff',
+      fontSize: '16px',
+      fontWeight: '570',
+      padding: '18px',
+      borderRadius: '18px',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      textTransform: 'uppercase',
+      letterSpacing: '1px',
+      justifyContent: 'center',
+      gap: '10px',
+      boxShadow: '0 15px 35px rgba(102, 126, 234, 0.4)',
+      transition: 'all 0.3s ease',
+      background: 'var(--primary-gradient)',
+      color: 'white'
+    }}
+    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
+    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1.0)'}
+  >
+    <img
+      src="https://www.svgrepo.com/show/355037/google.svg"
+      alt="Google"
+      style={{
+        width: '22px',
+        height: '22px',
+        background: 'white',
+        borderRadius: '50%',
+        padding: '2px'
+      }}
+    />
+    Continue with Google
+  </button>
+</div>
+          
 
           <div className="text-center mt-20">
             <button

@@ -125,7 +125,11 @@ const RegisterPage = () => {
 
       <div className="container">
         <div style={{ textAlign: 'center', padding: '40px 0' }}>
-          <h1 className="logo">EmoTune</h1>
+          <h1 className="logo"
+          onClick={() => navigate('/')} 
+          style={{ cursor: 'pointer' }}
+          > 
+          EmoTune</h1>
           <p className="tagline">
             AI-Based Emotion-Aware Music Recommender System
           </p>

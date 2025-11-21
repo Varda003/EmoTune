@@ -37,19 +37,14 @@ api.interceptors.request.use(
   }
 );
 // Handle token expiration
+// Simple response handler - don't auto-logout on 401
 api.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    if (error.response?.status === 401) {
-      // Token expired, clear storage and redirect to login
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-    }
+  (error) => {
+    console.error('❌ API Error:', error.response?.status, error.config?.url);
     return Promise.reject(error);
   }
 );
-
 // ==================== AUTHENTICATION ====================
 
 export const authAPI = {
@@ -92,23 +87,24 @@ export const authAPI = {
 
 export const emotionAPI = {
   detectFromUpload: async (imageFile) => {
-    const formData = new FormData();
-    formData.append('image', imageFile);
+  const formData = new FormData();
+  formData.append('image', imageFile);
 
-    const response = await api.post('/emotion/detect-upload', formData, {
+  const token = localStorage.getItem('access_token');
+  console.log('🔐 Manual token check:', token?.substring(0, 30));
+
+  const response = await axios.post(
+    `${API_BASE}/emotion/detect-upload`,
+    formData,
+    {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
       },
-    });
-    return response.data;
-  },
-
-  detectFromLive: async (base64Frame) => {
-    const response = await api.post('/emotion/detect-live', {
-      frame: base64Frame,
-    });
-    return response.data;
-  },
+    }
+  );
+  return response.data;
+},
 
   getModelInfo: async () => {
     const response = await axios.get(`${API_BASE}/emotion/model-info`);

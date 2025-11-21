@@ -6,7 +6,7 @@
     --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --success-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
     --warning-gradient: linear-gradient(135deg, #ff9a56 0%, #ff6b95 100%);
-    --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+    --dark-gradient: linear-gradient(135deg, #0a0e27 0%, #1a1d35 100%);
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -100,7 +100,7 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1700px;
     margin: 0 auto;
     padding: 20px;
     position: relative;
@@ -330,7 +330,7 @@ body {
 
 .dominant-emotion {
     text-align: center;
-    padding: 40px;
+    padding: 50px;
     background: var(--glass-bg);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
@@ -472,6 +472,9 @@ body {
     animation: spin 1s ease-in-out infinite;
 }
 
+
+
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
@@ -492,4 +495,6 @@ body {
     .music-grid {
         grid-template-columns: 1fr;
     }
+
+    
 }
