@@ -6,7 +6,7 @@ EmoTune is a full-stack web application that recommends music based on a user’
 ## 🎥 Demo Video
 
 👉 **Demo Video:**  
-(Add your video link here)  
+(https://github.com/Varda003/EmoTune/blob/main/Demo%20emotune.mp4)  
 
 ---
 
