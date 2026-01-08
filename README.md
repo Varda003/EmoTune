@@ -132,3 +132,7 @@ I would like to thank my mentors and team members for their guidance and support
 * 📧 Email: varda.hanwant03@gmail.com
 * 🔗 GitHub: (https://github.com/Varda003)
 
+## 🪪 License
+This project is released under the MIT License.
+It is provided for evaluation and educational purposes.
+
