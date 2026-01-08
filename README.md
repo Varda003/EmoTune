@@ -83,10 +83,52 @@ EmoTune captures a user’s facial expression, identifies their emotional state 
 git clone https://github.com/your-username/emotune.git
 cd emotune
 ```
-```cd backend
+```
+cd backend
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
+### 2️⃣ Create .env file
+```bash
+SECRET_KEY=your_secret_key
+JWT_SECRET_KEY=your_jwt_secret
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_app_password
+```
+### 3️⃣ Run Backend
+```bash
+python app.py
+```
+### 4️⃣ Frontend Setup
+``` bash
+cd frontend
+npm install
+npm start
+```
+### 5️⃣ Frontend Runs on
+``` bash
+http://localhost:3000
+```
+### 6️⃣ Run Backend
+```bash
+http://localhost:5000
+```
 
+## 🔮 Future Enhancements
+
+* Support for voice-based emotion detection
+* Multi-language song recommendations
+* Mobile application version
+* Improved model accuracy with larger datasets
+
+## 🤝 Acknowledgements
+
+I would like to thank my mentors and team members for their guidance and support throughout the development of EmoTune. This project helped me strengthen my skills in AI, full-stack development, and system integration.
+
+## 📬 Contact
+
+* Developer: Varda Hanwant
+* 📧 Email: varda.hanwant03@gmail.com
+* 🔗 GitHub: (https://github.com/Varda003)
 
