@@ -12,19 +12,24 @@ EmoTune is a full-stack web application that recommends music based on a user’
 
 ## 🖼️ Screenshots
 
+### Landing UI
+![Landing UI](https://github.com/Varda003/EmoTune/blob/main/P1_LandingPage_1.png)
+
 ### Login & Authentication
-![Login Page](screenshots/login.png)
+![Login Page](https://github.com/Varda003/EmoTune/blob/main/P3_RegisterPage.png)
 
 ### Emotion Detection
-![Emotion Detection](screenshots/emotion-detection.png)
+![Emotion Detection](https://github.com/Varda003/EmoTune/blob/main/P4_MainApp_1.png)
+
 
 ### Music Recommendations
-![Music Recommendations](screenshots/recommendations.png)
+![Music Recommendations](https://github.com/Varda003/EmoTune/blob/main/P4_MainApp_4.png)
+![Music Recommendations](https://github.com/Varda003/EmoTune/blob/main/P4_MainApp_6.png)
 
 ### User Profile & Stats
-![User Profile](screenshots/profile.png)
-
-*(Create a `screenshots/` folder and add your images there)*
+![User Profile](https://github.com/Varda003/EmoTune/blob/main/P5_ProfilePage_1.png)
+![User Profile](https://github.com/Varda003/EmoTune/blob/main/P5_ProfilePage_3.png)
+![User Profile](https://github.com/Varda003/EmoTune/blob/main/P5_ProfilePage_5.png)
 
 ---
 
