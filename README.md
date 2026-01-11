@@ -17,6 +17,7 @@ EmoTune is a full-stack web application that recommends music based on a user’
 
 ### Login & Authentication
 ![Login Page](https://github.com/Varda003/EmoTune/blob/main/P3_RegsiterPage.png)
+![Login Page](https://github.com/Varda003/EmoTune/blob/main/Google_Auth.png)
 
 ### Emotion Detection
 ![Emotion Detection](https://github.com/Varda003/EmoTune/blob/main/P4_MainApp_1.png)
